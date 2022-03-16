@@ -6,9 +6,5 @@ import routes from "../routes";
 
 export default function App(){
 	const myRoutes = useRoutes(routes);
-	return(
-		<div id="App">
-			{ myRoutes }
-		</div>
-	)
+	return myRoutes
 }

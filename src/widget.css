@@ -1,0 +1,15 @@
+.widthAuto{
+    /*div宽度适应文字*/
+    width:fit-content;
+    width:-webkit-fit-content;
+    width:-moz-fit-content;
+}
+.noselect{
+    /*无法选中*/
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}

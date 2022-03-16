@@ -1,5 +1,7 @@
 import Index from "../Components/Index";
 import Test from "../Components/Test";
+import Login from "../Components/Login";
+// import Message from "../Components/widget/Message";
 
 
 export default [
@@ -10,5 +12,9 @@ export default [
 	{
 		path: '/test',
 		element: <Test/>
+	},
+	{
+		path: '/login',
+		element:<Login/>
 	}
 ]

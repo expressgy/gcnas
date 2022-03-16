@@ -1,0 +1,28 @@
+
+
+
+
+
+.clearfix:after{clear:both;}
+.clearfix{
+    *zoom:1;/*IE/7/6*/
+}
+
+
+/*公共类*/
+.hide {
+    display:none
+}
+div{
+    position: relative;
+}
+input{
+    border-radius: 2px;
+}
+
+@font-face{
+    font-family: nice;
+    src:url('../font/nice.ttf') format('truetype');
+    font-weight:normal;
+    font-style:normal;
+}
