@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { randomString } from "../../tools";
+import store from '../../redux';
 
 // import Message from "../widget/Message";
 
@@ -17,7 +18,18 @@ export default function Login() {
 	function go(){
 		// Message.info('xs')
 		console.log('登录')
+		store.dispatch({
+			type:'test',
+			num:2,
+		});
 	}
+	useEffect(()=>{
+		console.log('sa')
+	})
+
+	const unsubscribe = store.subscribe(() => {
+		console.log(store.getState())
+	})
 
 	return (
 		<div className={gcss.main}>
