@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { randomString } from "../../tools";
 import store from '../../redux';
-
-// import Message from "../widget/Message";
+import {message} from "../../redux/actionSender";
 
 
 import gcss from'./index.module.scss'
@@ -16,20 +15,15 @@ export default function Login() {
 	const [rememberMe,setRememberMe] = useState(true)
 
 	function go(){
-		// Message.info('xs')
-		console.log('登录')
-		store.dispatch({
-			type:'test',
-			num:2,
-		});
+		message.info('正在登陆')
 	}
-	useEffect(()=>{
-		console.log('sa')
-	})
+	// useEffect(()=>{
+	// 	const unsubscribe = store.subscribe(() => {
+	// 		console.log(store.getState())
+	// 	})
+	// },[1])
 
-	const unsubscribe = store.subscribe(() => {
-		console.log(store.getState())
-	})
+
 
 	return (
 		<div className={gcss.main}>

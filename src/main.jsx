@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import './index.css'
 import './widget.css'
+import Message from '../Components/widget/Message'
 
 
 ReactDom.render(
@@ -15,4 +16,8 @@ ReactDom.render(
 		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById('root')
+)
+ReactDom.render(
+	<Message/>,
+	document.getElementById('message_window')
 )
