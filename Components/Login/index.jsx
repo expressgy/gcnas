@@ -15,7 +15,7 @@ export default function Login() {
 	const [rememberMe,setRememberMe] = useState(true)
 
 	function go(){
-		message.info('正在登陆')
+		message.info('正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆')
 	}
 	// useEffect(()=>{
 	// 	const unsubscribe = store.subscribe(() => {

@@ -1,9 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import store from "../../../redux";
 
+import {MESSAGE_ERROR,MESSAGE_SUCCESS,MESSAGE_WARNING,MESSAGE_INFO} from "../../../redux/constant";
+
+import gcss from './index.module.scss'
+import info from './info.svg'
+import success from './success.svg'
+import warning from './warning.svg'
+import error from './error.svg'
+
+const svg = {
+    [MESSAGE_INFO]:info,
+    [MESSAGE_SUCCESS]:success,
+    [MESSAGE_WARNING]:warning,
+    [MESSAGE_INFO]:error
+}
+
 export default function Message(){
     const [messageList,setMessageList] = useState({})
-    const [num,setNum] = useState(0)
     useEffect(() => {
         const unsubscribe = store.subscribe(() => {
             const storeData = store.getState();
@@ -11,21 +25,18 @@ export default function Message(){
                 setMessageList({...messageList,[storeData.id]:storeData})
                 unsubscribe()
             }else if(storeData.type.indexOf('messagen') > -1){
-                const a = messageList
-                delete a[storeData.id]
-                console.log('???',a)
+                delete messageList[storeData.id]
+                const a = JSON.parse(JSON.stringify(messageList))
                 setMessageList(a)
                 unsubscribe()
             }
         })
     })
     return (
-        <div>
-            <div onClick={() => setNum(num+1)}>sxasxas</div>
+        <>
             {Object.keys(messageList).map((index,item) => {
-                console.log(index,item)
-                return (<div key={messageList[index].id}>{messageList[index].data}</div>)
+                return (<div className={gcss.box}  style={{top:`${2 * item}rem`}} key={messageList[index].id}><div><img src={svg[messageList[index].type]} alt=""/></div><div className={gcss.p}>{messageList[index].data}</div></div>)
             })}
-        </div>
+        </>
     )
 }

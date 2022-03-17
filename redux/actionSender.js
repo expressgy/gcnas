@@ -1,6 +1,9 @@
 import store from "./index";
-import {MESSAGE_ERROR, MESSAGE_SUCCESS, MESSAGE_WARNING,MESSAGE_INFO} from "./constant";
+import {MESSAGE_ERROR, MESSAGE_SUCCESS, MESSAGE_WARNING,MESSAGE_INFO,MESSAGEN} from "./constant";
 import {randomString} from "../tools";
+
+const messageDelay = 4000
+
 
 export const message = {
         success: data => {
@@ -36,19 +39,15 @@ export const message = {
             })
         },
         info: data => {
-            store.dispatch({
+            const message = {
                 type: MESSAGE_INFO,
                 data,
                 id:randomString()
-            })
+            }
+            store.dispatch(message)
             setTimeout(() => {
-                store.dispatch(
-                    {
-                        type: 'messagen',
-                        data,
-                        id:randomString()
-                    }
-                )
-            },4000)
+                message.type = MESSAGEN
+                store.dispatch(message)
+            },messageDelay)
         }
     }
