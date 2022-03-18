@@ -7,36 +7,40 @@ const messageDelay = 4000
 
 export const message = {
         success: data => {
-            store.dispatch(
-                {
-                    type: MESSAGE_SUCCESS,
-                    data,
-                    id:randomString()
-                }
-            )
+            const message = {
+                type: MESSAGE_SUCCESS,
+                data,
+                id:randomString()
+            }
+            store.dispatch(message)
             setTimeout(() => {
-                store.dispatch(
-                    {
-                        type: 'messagen',
-                        data,
-                        id:randomString()
-                    }
-                )
-            },4000)
+                message.type = MESSAGEN
+                store.dispatch(message)
+            },messageDelay)
         },
         warning: data => {
-            store.dispatch({
+            const message = {
                 type: MESSAGE_WARNING,
                 data,
                 id:randomString()
-            })
+            }
+            store.dispatch(message)
+            setTimeout(() => {
+                message.type = MESSAGEN
+                store.dispatch(message)
+            },messageDelay)
         },
         error: data => {
-            store.dispatch({
+            const message = {
                 type: MESSAGE_ERROR,
                 data,
                 id:randomString()
-            })
+            }
+            store.dispatch(message)
+            setTimeout(() => {
+                message.type = MESSAGEN
+                store.dispatch(message)
+            },messageDelay)
         },
         info: data => {
             const message = {

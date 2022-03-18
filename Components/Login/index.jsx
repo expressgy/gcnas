@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { randomString } from "../../tools";
-import store from '../../redux';
 import {message} from "../../redux/actionSender";
 
 
@@ -12,16 +12,25 @@ import passwordIco from './password.svg'
 export default function Login() {
 	const [username,setUsername] = useState('');
 	const [password,setPassword] = useState('');
-	const [rememberMe,setRememberMe] = useState(true)
+	const [rememberMe,setRememberMe] = useState(true);
+
+	const navigate = useNavigate();
 
 	function go(){
-		message.info('正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆正在登陆')
+		const text = veriUsername(username,password);
+		if(text.next){
+			// 登录请求
+		}else{
+			message[text.type](text.data)
+		}
 	}
-	// useEffect(()=>{
-	// 	const unsubscribe = store.subscribe(() => {
-	// 		console.log(store.getState())
-	// 	})
-	// },[1])
+	function changeWord(event){
+		if(event.target.placeholder == 'username'){
+			setUsername(event.target.value)
+		}else{
+			setPassword(event.target.value)
+		}
+	}
 
 
 
@@ -38,15 +47,15 @@ export default function Login() {
 						<div>
 							<div className={gcss.inputBox}>
 								<div className={gcss.icoBox}><img className={gcss.ico} src={usernameIco} alt=""/></div>
-								<div><input name={ randomString() } type="text" placeholder='username'/></div>
+								<div><input name={ randomString() } type="text" placeholder='username' onChange={changeWord}/></div>
 							</div>
 							<div className={gcss.inputBox}>
 								<div className={gcss.icoBox}><img className={gcss.ico} src={passwordIco} alt=""/></div>
-								<div><input name={ randomString() } type="password" placeholder='password'/></div>
+								<div><input name={ randomString() } type="password" placeholder='password' onChange={changeWord}/></div>
 							</div>
 							<div className={gcss.operation}>
 								<div className={rememberMe ? gcss.remember : ''} onClick={ () => setRememberMe(!rememberMe)}>Remember me</div>
-								<div>Register</div>
+								<div onClick={() => navigate('/sign')}>Register</div>
 								<div>Retrieve</div>
 							</div>
 						</div>
@@ -58,4 +67,37 @@ export default function Login() {
 			</div>
 		</div>
 	);
+}
+
+function veriUsername(u,p){
+	if(u.length < 8){
+		return{
+			next:false,
+			type:'warning',
+			data:'用户名长度不会小于8位'
+		}
+	}else if(u.length > 128){
+		return{
+			next:false,
+			type:'warning',
+			data:'用户名长度不会大于128位'
+		}
+	}if(p.length < 8){
+		return{
+			next:false,
+			type:'warning',
+			data:'密码长度不会小于8位'
+		}
+	}else if(p.length > 256){
+		return{
+			next:false,
+			type:'warning',
+			data:'密码长度不会大于256位'
+		}
+	}else{
+		return {
+			next: true
+		}
+	}
+
 }
