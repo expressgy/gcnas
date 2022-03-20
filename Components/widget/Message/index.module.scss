@@ -32,9 +32,11 @@ $show:show;
 
 @keyframes show {
   from{
+    margin-top: 1rem;
     opacity:0
   }
   to{
+    margin-top: 0;
     opacity:1
   }
 }

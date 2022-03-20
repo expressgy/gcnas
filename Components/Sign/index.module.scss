@@ -73,6 +73,35 @@
                 input:focus{
                     box-shadow: 0 8px 40px rgba(0,0,0,.3);
                 }
+                .send{
+                    position: relative;
+                    display: flex;
+                    & > div:first-child{
+                        flex: 1;
+                        display: flex;
+                    }
+                    & > div:nth-child(2){
+                        line-height: 2rem;
+                        margin: 0 0.5rem;
+                        padding: 0 0.5rem;
+                        box-sizing: border-box;
+                        border-radius: 0.3rem;
+                        background: #222;
+                        color: #fefefe;
+                        cursor: pointer;
+                        transition: all 300ms ease-in-out;
+                    }
+                    & > div:nth-child(2):hover{
+                        box-shadow: 0 8px 40px rgba(0,0,0,.3);
+                    }
+
+                    .input1{
+                        flex: 1;
+                        //flex-shrink: 1;
+                        display: block;
+                        width: auto;
+                    }
+                }
                 .gotoOther{
                         position: relative;
                         margin: 0 3rem 0 0;
