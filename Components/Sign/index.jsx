@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {message} from "../../redux/actionSender";
+import AskGY from "../../request/api"
 
 
 import gcss from './index.module.scss'
@@ -85,7 +86,7 @@ export default function Sign(){
     function send(){
         console.log('给邮箱发送验证码')
     }
-    function go(){
+    async function go(){
         if(username.length < 8){
             message.warning('用户名长度需大于8位')
             return false
@@ -104,6 +105,10 @@ export default function Sign(){
         }
 
         // 前往注册
+        const responseMessage = await AskGY.checkDuplicateForUsername({
+            username
+        })
+        console.log(responseMessage)
     }
 
     return (
