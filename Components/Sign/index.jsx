@@ -10,7 +10,7 @@ export default function Sign(){
     const [username,setUsername] = useState('');
     const [passwd1,setPasswd1] = useState('');
     const [passws2,setPasswd2] = useState('');
-    const [nick,setNick] = useState('');
+    const [nickname,setNick] = useState('');
     const [email,setEmail] = useState('');
     const [code,setCode] = useState('');
 
@@ -52,7 +52,7 @@ export default function Sign(){
     function handleChangeForNick(event){
         if(event.target.value.length > 32 ){
             message.warning('昵称长度超限')
-            setNick(nick)
+            setNick(nickname)
             return false
         }else{
             setNick(event.target.value)
@@ -83,8 +83,17 @@ export default function Sign(){
             return (``)
         }
     }
-    function send(){
-        console.log('给邮箱发送验证码')
+    async function send(){
+        //  用户名查重
+        const responseData = await AskGY.checkDuplicateForUsername({username})
+        console.log(responseData)
+        if(responseData.type == 'success'){
+            //  发送验证码
+            const responseData2 = await AskGY.sendEmailCode({username,email})
+            if(responseData2.type == 'success'){
+                message.success(responseData2.message)
+            }
+        }
     }
     async function go(){
         if(username.length < 8){
@@ -105,12 +114,23 @@ export default function Sign(){
         }
 
         // 前往注册
-        const responseMessage = await AskGY.checkDuplicateForUsername({
-            username
+        const responseData = await AskGY.veriEmailCode({
+            username,
+            password:passwd1,
+            email,
+            code,
+            nickname
         })
-        console.log(responseMessage)
+        if(responseData.type == 'success'){
+            message[responseData.type](responseData.message)
+            /**
+             *
+             * 存储JWT
+             *
+             * */
+            navigate('/home')
+        }
     }
-
     return (
         <div className={gcss.main}>
             <div className={gcss.signBox}>
@@ -133,7 +153,7 @@ export default function Sign(){
                     </div>
                     <div className={gcss.inputFather}>
                         <div className={gcss.name+' widthAuto'}>NickName</div>
-                        <div><input className={gcss.input1} type="text" onChange={handleChangeForNick} value={nick}/></div>
+                        <div><input className={gcss.input1} type="text" onChange={handleChangeForNick} value={nickname}/></div>
                     </div>
                     <div className={gcss.inputFather}>
                         <div className={gcss.name+' widthAuto'}>Email</div>
