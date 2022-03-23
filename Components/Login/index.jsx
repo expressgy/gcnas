@@ -14,7 +14,8 @@ export default function Login() {
 	const [username,setUsername] = useState('');
 	const [password,setPassword] = useState('');
 	const [rememberMe,setRememberMe] = useState(true);
-	const [goStatus,setGoStatus] = useState(true)
+	const [goStatus,setGoStatus] = useState(true);
+	const passwordObj = React.createRef()
 
 	const navigate = useNavigate();
 
@@ -43,7 +44,10 @@ export default function Login() {
 						window.SupermeGY = ''
 						window.SupermeGYSSS = responseData.jwt
 					}
+					window.me = responseData.username
 					navigate('/home')
+				}else{
+					setGoStatus(true)
 				}
 			}catch (e){
 
@@ -57,6 +61,17 @@ export default function Login() {
 			setUsername(event.target.value)
 		}else{
 			setPassword(event.target.value)
+		}
+	}
+	function handleKeyUp(event){
+		if(event.target.placeholder == 'username'){
+			if(event.keyCode == 13){
+				passwordObj.current.focus()
+			}
+		}else{
+			if(event.keyCode == 13){
+				go()
+			}
 		}
 	}
 
@@ -75,11 +90,11 @@ export default function Login() {
 						<div>
 							<div className={gcss.inputBox}>
 								<div className={gcss.icoBox}><img className={gcss.ico} src={usernameIco} alt=""/></div>
-								<div><input name={ randomString() } type="text" placeholder='username' onChange={changeWord}/></div>
+								<div><input name={ randomString() } type="text" placeholder='username' onChange={changeWord} onKeyUp={handleKeyUp}/></div>
 							</div>
 							<div className={gcss.inputBox}>
 								<div className={gcss.icoBox}><img className={gcss.ico} src={passwordIco} alt=""/></div>
-								<div><input name={ randomString() } type="password" placeholder='password' onChange={changeWord}/></div>
+								<div><input name={ randomString() } type="password" placeholder='password' onChange={changeWord} ref={passwordObj} onKeyUp={handleKeyUp}/></div>
 							</div>
 							<div className={gcss.operation}>
 								<div className={rememberMe ? gcss.remember : ''} onClick={ () => setRememberMe(!rememberMe)}>Remember me</div>

@@ -15,7 +15,15 @@ const AskGY = {
     /**
      * 登录模块
      * */
-    cheakPassword : async info => {return Ask.post('./askgy/login/checkPassword',info)}
+    cheakPassword : async info => {return Ask.post('./askgy/login/checkPassword',info)},
+    /**
+     * Home模块
+     * */
+
+    /**
+     * ********* Home Setting
+     * */
+    getUserInfo : async info => {return Ask.post('./askgy/home/getUserInfo',info)}
 }
 
 export default AskGY

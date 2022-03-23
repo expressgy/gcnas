@@ -32,6 +32,7 @@ async function initSupermeGY() {
 async function setSupermeGY(){
 	return new Promise(async (rec,rej) => {
 		await initSupermeGY()
+		//	存储JWT
 		Object.defineProperty(window,'SupermeGY',{
 			configurable:false,//	不可删除
 			// writable:false,//	可修改,设置set和get后writable和value失效
@@ -53,6 +54,18 @@ async function setSupermeGY(){
 			},
 			set:(jwt) => {
 				sessionStorage.setItem('SupermeGYSSS', jwt);
+			}
+		})
+		//	存储用户名
+		Object.defineProperty(window,'me',{
+			configurable:false,//	不可删除
+			// writable:false,//	可修改,设置set和get后writable和value失效
+			enumerable: false,//	不可枚举
+			get:() => {
+				return localStorage.getItem('me')
+			},
+			set:(username) => {
+				localStorage.setItem('me', username);
 			}
 		})
 		rec()

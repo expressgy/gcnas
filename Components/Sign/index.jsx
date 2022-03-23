@@ -141,6 +141,7 @@ export default function Sign(){
              *
              * */
             SupermeGY = responseData.jwt
+            window.me = responseData.username
             navigate('/home')
         }
     }

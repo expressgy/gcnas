@@ -1,5 +1,5 @@
 import axios from "axios";
-import { message } from "../redux/actionSender";
+import { message, goto } from "../redux/actionSender";
 
 const Ask = axios.create({})
 
@@ -10,6 +10,8 @@ Ask.interceptors.request.use(function (config) {
         // 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
         'Content-Type': 'application/json; charset=utf-8'
     }
+    //  这里要添加Token
+    console.log(JSON.parse(config.data))
     return config;
 }, function (error) {
     // 对请求错误做些什么
@@ -23,6 +25,12 @@ Ask.interceptors.response.use(function (response) {
     // 对响应数据做点什么
     if(response.data.type == 'warning' || response.data.type == 'error'){
         message[response.data.type](response.data.message)
+        // if(response.data.code == 401){
+        //     message.error('未检测到Token或Token无效，请重新登录!')
+        //     window.SupermeGY = ''
+        //     window.SupermeGYSSS = ''
+        //     goto(window.location.pathname,'/login')
+        // }
     }
     return response.data;
 }, function (error) {

@@ -20,11 +20,11 @@ export default function Message(){
     const [messageList,setMessageList] = useState({})
     useEffect(() => {
         const unsubscribe = store.subscribe(() => {
-            const storeData = store.getState();
-            if(storeData.type.indexOf('message_') > -1){
+            const storeData = store.getState().message;
+            if(storeData.messageType.indexOf('message_') > -1){
                 setMessageList({...messageList,[storeData.id]:storeData})
                 unsubscribe()
-            }else if(storeData.type.indexOf('messagen') > -1){
+            }else if(storeData.messageType.indexOf('messagen') > -1){
                 delete messageList[storeData.id]
                 const a = JSON.parse(JSON.stringify(messageList))
                 setMessageList(a)
@@ -35,7 +35,7 @@ export default function Message(){
     return (
         <>
             {Object.keys(messageList).map((index,item) => {
-                return (<div className={gcss.box}  style={{top:`${2 * item}rem`}} key={messageList[index].id}><div><img src={svg[messageList[index].type]} alt=""/></div><div className={gcss.p}>{messageList[index].data}</div></div>)
+                return (<div className={gcss.box}  style={{top:`${2 * item}rem`}} key={messageList[index].id}><div><img src={svg[messageList[index].messageType]} alt=""/></div><div className={gcss.p}>{messageList[index].data}</div></div>)
             })}
         </>
     )
