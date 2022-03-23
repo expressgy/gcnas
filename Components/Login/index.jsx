@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { randomString } from "../../tools";
+import { randomString, logined } from "../../tools";
 import {message} from "../../redux/actionSender";
+import AskGY from "../../request/api";
 
 
 import gcss from'./index.module.scss'
@@ -13,13 +14,40 @@ export default function Login() {
 	const [username,setUsername] = useState('');
 	const [password,setPassword] = useState('');
 	const [rememberMe,setRememberMe] = useState(true);
+	const [goStatus,setGoStatus] = useState(true)
 
 	const navigate = useNavigate();
 
-	function go(){
+	useEffect(() => {
+		if(logined()){
+			navigate('/home');
+			return false
+		}
+	})
+
+	async function go(){
 		const text = veriUsername(username,password);
 		if(text.next){
 			// 登录请求
+			if(!goStatus){
+				return
+			}
+			try{
+				setGoStatus(false)
+				const responseData = await AskGY.cheakPassword({username,password})
+				if(responseData.type == 'success'){
+					message.success('登陆成功: ' + username)
+					if(rememberMe){
+						window.SupermeGY = responseData.jwt
+					}else{
+						window.SupermeGY = ''
+						window.SupermeGYSSS = responseData.jwt
+					}
+					navigate('/home')
+				}
+			}catch (e){
+
+			}
 		}else{
 			message[text.type](text.data)
 		}

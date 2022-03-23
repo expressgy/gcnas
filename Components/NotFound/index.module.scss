@@ -1,0 +1,24 @@
+.main{
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    background-image: linear-gradient(to bottom, transparent 75%, #ffffff 100%),radial-gradient(at 0% 0%,hsla(154,4%,50%,0.25) 0,transparent 50%),radial-gradient(at 0% 50%,hsla(120,5%,50%,0.23) 0,transparent 50%),radial-gradient(at 40% 40%,hsla(120,4%,50%,0.21) 0,transparent 50%),radial-gradient(at 80% 0%, #ffffff 0, transparent 50%),radial-gradient(at 80% 50%, #ffffff 0, transparent 50%),radial-gradient(at 80% 50%, #ffffff 0, transparent 50%),linear-gradient(to bottom, transparent 75%, #ffffff 100%);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    .title{
+        position: relative;
+        font-size: 3rem;
+        line-height: 5rem;
+    }
+    .text{
+        font-size: 1rem;
+    }
+}

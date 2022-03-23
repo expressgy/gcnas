@@ -13,16 +13,23 @@ export default function Sign(){
     const [nickname,setNick] = useState('');
     const [email,setEmail] = useState('');
     const [code,setCode] = useState('');
+    const [canSend,setCanSend] = useState(0)
 
     //  判断邮箱格式正则表达式
     const reg = /^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}$/;
+    useEffect(() => {
+        if(canSend != 0){
+            setTimeout(() => {
+                setCanSend(canSend - 1)
+            },1000)
+        }
+    },[canSend])
 
 
     const navigate = useNavigate();
 
 
     function handleChangeForUsername(event){
-        console.log(event)
         if(event.target.value.length > 128 ){
             message.warning('用户名长度超限')
             setUsername(username)
@@ -84,13 +91,18 @@ export default function Sign(){
         }
     }
     async function send(){
+        if(canSend != 0){
+            message.warning('请等待 '+canSend+' 秒后再重新发送')
+            return false
+        }
         //  用户名查重
         const responseData = await AskGY.checkDuplicateForUsername({username})
-        console.log(responseData)
+        // console.log(responseData)
         if(responseData.type == 'success'){
             //  发送验证码
             const responseData2 = await AskGY.sendEmailCode({username,email})
             if(responseData2.type == 'success'){
+                setCanSend(60)
                 message.success(responseData2.message)
             }
         }
@@ -128,6 +140,7 @@ export default function Sign(){
              * 存储JWT
              *
              * */
+            SupermeGY = responseData.jwt
             navigate('/home')
         }
     }

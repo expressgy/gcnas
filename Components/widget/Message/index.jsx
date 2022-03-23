@@ -13,7 +13,7 @@ const svg = {
     [MESSAGE_INFO]:info,
     [MESSAGE_SUCCESS]:success,
     [MESSAGE_WARNING]:warning,
-    [MESSAGE_INFO]:error
+    [MESSAGE_ERROR]:error
 }
 
 export default function Message(){

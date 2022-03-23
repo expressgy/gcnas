@@ -1,6 +1,6 @@
 import store from "./index";
 import {MESSAGE_ERROR, MESSAGE_SUCCESS, MESSAGE_WARNING,MESSAGE_INFO,MESSAGEN} from "./constant";
-import {randomString} from "../tools";
+import { randomString } from "../tools";
 
 const messageDelay = 4000
 

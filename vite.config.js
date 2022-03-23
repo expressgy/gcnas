@@ -10,6 +10,7 @@ export default defineConfig({
             //假如你要请求https://api.*.com/a/a
             //那么axios的url，可以配置为 /api/a/a
             '/askgy': 'http://localhost:5000/'
-        }
+        },
+	host:'0.0.0.0'
     }
 })
