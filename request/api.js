@@ -23,7 +23,9 @@ const AskGY = {
     /**
      * ********* Home Setting
      * */
-    getUserInfo : async info => {return Ask.post('./askgy/home/getUserInfo',info)}
+    getUserInfo : async info => {return Ask.post('./askgy/home/getUserInfo',info)},
+    updateUserInfo : async info => {return Ask.post('./askgy/home/updateUserInfo',info)},
+    updateUserPass : async info => {return Ask.post('./askgy/home/updateUserPass',info)},
 }
 
 export default AskGY

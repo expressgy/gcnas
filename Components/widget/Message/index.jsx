@@ -21,6 +21,8 @@ export default function Message(){
     useEffect(() => {
         const unsubscribe = store.subscribe(() => {
             const storeData = store.getState().message;
+            // if(Object.keys(storeData).length == 0) return false
+            if(!storeData) return false
             if(storeData.messageType.indexOf('message_') > -1){
                 setMessageList({...messageList,[storeData.id]:storeData})
                 unsubscribe()

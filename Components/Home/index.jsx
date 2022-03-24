@@ -15,16 +15,15 @@ export default function Home() {
     /**
      * 写完了解注释，不然下面不提示，鉴权
      * */
-    // if(authentication()){
-    //     useEffect(() =>  setTimeout(() => navigate('/login'),4000))
-    //     return <>你没有权限访问此页面</>
-    // }
+    if(authentication()){
+        useEffect(() =>  setTimeout(() => navigate('/login'),4000))
+        return <>你没有权限访问此页面</>
+    }
     useEffect(() => {
         const unsubscribe = store.subscribe(() => {
             const storeData = store.getState().goto;
             if(storeData && location.pathname == storeData.from){
                 navigate(storeData.to)
-                goto(randomString(),randomString())
             }
         })
         return () =>{

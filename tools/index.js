@@ -11,7 +11,7 @@ function randomString(len) {
 	return pwd;
 }
 function authentication(){
-	if(SupermeGY.length == 0 && SupermeGYSSS.length == 0 && useLocation().pathname != '/home' && useLocation().pathname != '/sign' && useLocation().pathname != '/'){
+	if(SupermeGY.length == 0 && SupermeGYSSS.length == 0 && useLocation().pathname != '/login' && useLocation().pathname != '/sign' && useLocation().pathname != '/'){
 		return true
 	}
 	else{

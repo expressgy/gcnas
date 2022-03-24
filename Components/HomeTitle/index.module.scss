@@ -2,12 +2,13 @@
     position: absolute;
     top:0;
     left: 0;
-    background: #222;
+    background: #111111;
     width: 100%;
     height: 5rem;
     box-shadow: 8px 8px 40px rgba(0,0,0,.3);
     display: flex;
     flex-direction: row-reverse;
+    transition: height ease-in-out 300ms;
 
     overflow: hidden;
 
@@ -19,6 +20,7 @@
         flex-shrink: 0;
         display: flex;
         flex-direction: column;
+        transition: width ease-in-out 300ms, background ease-in-out 300ms, height ease-in-out 300ms;
         .entryBox{
             position: relative;
             width: 100%;
@@ -27,30 +29,152 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: height ease-in-out 300ms;
+            cursor: pointer;
             .avatarBox{
                 position: relative;
                 img{
+                    background: rgba(0,0,0,0);
+                    margin: 1rem;
                     width: 4rem;
                     border-radius: 4em;
-
-                    box-shadow: 0px 8px 20px rgba(255,255,255,.3);
-                    cursor: pointer;
+                    box-shadow: 0px 0px 20px rgba(166,166,166,.8);
+                    transition: all ease-in-out 300ms;
                 }
             }
             .avatarTextBox{
-                position: relative;
-                font-size: 1.2rem;
+                position: absolute;
+                font-size: 1.6rem;
+                text-align: center;
+                margin: 0 auto;
+                color: #fefefe;
+                //top:0;
+                left: 0;
+                right: 0;
             }
         }
         .menuBox{
             position: relative;
             flex: 1;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            .logOut{
+                position: relative;
+                flex-shrink: 0;
+                width: auto;
+                margin: 1rem;
+                padding: 1rem;
+                border-radius: 0.6rem;
+                border:1px #fefefe solid;
+                text-align: center;
+                cursor: pointer;
+                color:#fefefe;
+                transition: all ease-in-out 300ms;
+                &:hover{
+                    background: #ededed;
+                    color:#111111;
+                }
+            }
+            .menu{
+                position: relative;
+                flex: 1;
+                width: 100%;
+                overflow: hidden;
+                box-sizing: border-box;
+                padding: 1rem;
+                & > div{
+                    position: relative;
+                    width: auto;
+                    border-radius: 0.6rem;
+                    border: 1px solid rgba(255,255,255,0.2);
+                    padding: 0.6rem;
+                    box-sizing: border-box;
+                    margin: 1rem 0;
+                    color:#fefefe;
+                    cursor: pointer;
+                    transition: all ease-in-out 100ms;
+                    &:hover{
+                        background:rgba(255,255,255,0.8);
+                        color:#111111;
+                    }
+                }
+                .chooseConfigMenu{
+                    background:rgba(255,255,255,1) !important;
+                    color:#111111;
+                }
+            }
         }
     }
     .body{
         position: relative;
         height: 100%;
         flex: 1;
+        transition: all ease-in-out 300ms;
+
+        background-position: center 100%;
+        background-repeat: no-repeat;
+        background-size:cover;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        display: flex;
+        .copyright{
+            position: relative;
+            flex-shrink: 0;
+            width: 30rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+            & > div{
+                position: relative;
+                max-width: 70%;
+                & > div:first-child{
+                    position: relative;
+                    font-size: 1.4rem;
+                    color:#fefefe;
+                    line-height: 4rem;
+                }
+                & > div:nth-child(2){
+                    position: relative;
+                    font-size: 1.2rem;
+                    color:#999;
+                }
+            }
+        }
+        .configWindow{
+            position: relative;
+            flex: 1;
+            min-width: 600px;
+            background: rgba(2,2,2,.5);
+            backdrop-filter: blur(40px);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 2rem;
+        }
+    }
+}
+.mainOpen{
+    height: 60vh;
+    z-index: 100000;
+    .title{
+        width: 25rem;
+        .entryBox{
+            height: 12rem;
+            margin-bottom: 2rem;
+            .avatarBox{
+                img{
+                    width: 8rem;
+                    border-radius: 8em;
+                }
+            }
+        }
+    }
+    .body{
+        background: #fefefe;
     }
 }

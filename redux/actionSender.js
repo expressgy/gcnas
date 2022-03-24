@@ -1,5 +1,5 @@
 import store from "./index";
-import {MESSAGE_ERROR, MESSAGE_SUCCESS, MESSAGE_WARNING,MESSAGE_INFO,MESSAGEN,GOTO} from "./constant";
+import {MESSAGE_ERROR, MESSAGE_SUCCESS, MESSAGE_WARNING,MESSAGE_INFO,MESSAGEN,GOTO, REFRESH} from "./constant";
 import { randomString } from "../tools";
 
 const messageDelay = 4000
@@ -65,6 +65,14 @@ export const goto = (from,to) => {
         type:GOTO,
         from,
         to
+    }
+    store.dispatch(action)
+}
+
+export const refresh = (master) => {
+    const action = {
+        type:REFRESH,
+        master
     }
     store.dispatch(action)
 }
