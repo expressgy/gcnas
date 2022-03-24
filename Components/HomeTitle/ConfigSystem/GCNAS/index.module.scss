@@ -1,0 +1,33 @@
+.main {
+    position: relative;
+    height: 100%;
+    margin-left: 2rem;
+    border-radius: 0.6rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    flex-direction: column;
+    & > header{
+        position: relative;
+        padding: 0.3rem 0 0.3rem 2rem;
+        border-left: 0.3rem solid #fefefe;
+        flex-shrink: 0;
+        width: 100%;
+        font-size: 1.5rem;
+        color: #fefefe;
+        margin-bottom: 1rem;
+    }
+    & > .body{
+        position: relative;
+        width: 100%;
+        flex: 1;
+    }
+    & > footer{
+        position: relative;
+        position: relative;
+        padding: 0.3rem 0 0.3rem 2rem;
+        margin-top: 1rem;
+        font-size: 1.5rem;
+        width: 100%;
+        color: #fefefe;
+    }
+}

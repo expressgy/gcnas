@@ -3,8 +3,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
     flex: 1;
-    header{
+    & > header{
         position: relative;
         width: 100%;
         flex-shrink: 0;
@@ -12,20 +14,64 @@
         padding: 1rem;
         font-weight: 700;
         line-height: 2em;
-        color:rgba(255,255,255,0.5);
+        color:#fefefe;
     }
     .body{
         position: relative;
         width: 100%;
         flex: 1;
-        padding: 1rem;
+        padding: 3rem;
         border-radius: 0.6rem;
-        background:rgba(2,2,2,0.3);
-        backdrop-filter: blur(20px);
+        background:rgba(1,1,1,0.01);
+        //backdrop-filter: blur(20px);
         box-sizing: border-box;
         box-shadow: 0px 8px 40px rgba(255,255,255,0.1);
+        display: flex;
+        .configMenu{
+            position: relative;
+            flex-shrink: 0;
+            width: 16rem;
+            height: 100%;
+            //background: #06FF00;
+            .menuTitle{
+                position: relative;
+                font-size: 1.5rem;
+                line-height: 2em;
+                text-align: center;
+                color:#fefefe;
+                padding: 1rem 0;
+            }
+            .menuBody{
+                position: relative;
+                .menuList{
+                    position: relative;
+                    background: rgba(100,100,100,.5);
+                    border-radius: 0.3rem;
+                    box-sizing: border-box;
+                    font-size: 1.2rem;
+                    padding: 0.5rem;
+                    margin-top: 1rem;
+                    color: #fefefe;
+                    cursor: pointer;
+                    transition: all ease-in-out 300ms;
+                    &:hover{
+                        background: rgba(200,200,200,.7);
+                        box-shadow: 0px 8px 40px rgba(255,255,255,0.1);
+                    }
+                }
+                .menuListOnChoose{
+                    background: rgba(255,255,255,0.95) !important;
+                    color:#222!important;
+                }
+            }
+        }
+        .configBody{
+            position: relative;
+            flex: 1;
+            height: 100%;
+        }
     }
-    footer{
+    & > footer{
         position: relative;
         width: 100%;
         flex-shrink: 0;

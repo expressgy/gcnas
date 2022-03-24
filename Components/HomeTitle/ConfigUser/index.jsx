@@ -16,6 +16,9 @@ export default function ConfigUser(props){
     const [oldPass,setOldPass] = useState('')
     const [newPass1,setNewPass1] = useState('')
     const [newPass2,setNewPass2] = useState('')
+
+    const [upInfoState, setUpInfoState] = useState(true)
+    const [upPasswordState, setUpPasswordState] = useState(true)
     const checkPassword = () => {
         if(oldPass.length > 8 && newPass1.length > 8 && newPass1 == newPass2){
             return true
@@ -55,7 +58,15 @@ export default function ConfigUser(props){
             const responseData = await AskGY.updateUserInfo({
                 nickname : newNickname
             })
+            setUpInfoState(!upInfoState)
+            const setUpInfoStateTimeout = setTimeout(() => {
+                setUpInfoState(!upInfoState)
+            },3000)
             if(responseData.type == 'success'){
+                if(!upInfoState){
+                    clearTimeout(setUpInfoStateTimeout);
+                    setUpInfoState(!upInfoState)
+                }
                 message.success(responseData.message)
                 setOldNickname(newNickname)
                 refresh('/home')
@@ -76,11 +87,19 @@ export default function ConfigUser(props){
             message.warning('新密码过短，无法修改！')
             return
         }
+
         const responseData = await AskGY.updateUserPass({
             oldPass,
             newPass1
         })
+        const setUpPasswordStateTimeout = setTimeout(() => {
+            setUpPasswordState(!upPasswordState)
+        },3000)
         if(responseData.type == 'success'){
+            if(!upPasswordState){
+                clearTimeout(setUpPasswordStateTimeout);
+                setUpPasswordState(!upPasswordState)
+            }
             message.success(responseData.message+'，请重新登录！')
             window.SupermeGY = ''
             window.SupermeGYSSS = ''

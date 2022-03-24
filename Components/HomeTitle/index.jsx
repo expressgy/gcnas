@@ -45,9 +45,9 @@ export default function HomeTitle(){
     }
         //  菜单界面开关
     function chooseConfigMenu(event){
-        const a = event.target.getAttribute('_name');
+        const name = event.target.getAttribute('_name');
         const newState = new Array(3).fill(0)
-        newState[a] = !settingMenuState[a]
+        newState[name] = 1
         setSettingMenuState(newState)
     }
 
@@ -64,7 +64,7 @@ export default function HomeTitle(){
             <div className={gcss.menuBox} style={settingState ? {display:"flex"} : {display:"none"}}>
                 <div className={gcss.menu}>
                     <div _name='0' onClick={chooseConfigMenu} className={settingMenuState[0] ? gcss.chooseConfigMenu : ''}>Configure User</div>
-                    <div _name='1' onClick={chooseConfigMenu} className={settingMenuState[1] ? gcss.chooseConfigMenu : ''}>Configure SYstem</div>
+                    <div _name='1' onClick={chooseConfigMenu} className={settingMenuState[1] ? gcss.chooseConfigMenu : ''}>Configure System</div>
                     <div _name='2' onClick={chooseConfigMenu} className={settingMenuState[2] ? gcss.chooseConfigMenu : ''}>Specify Repository</div>
                 </div>
                 <div className={`${gcss.logOut} widthAuto`}>退出登录</div>
