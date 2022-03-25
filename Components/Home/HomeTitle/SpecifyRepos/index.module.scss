@@ -27,6 +27,48 @@
         box-sizing: border-box;
         box-shadow: 0px 8px 40px rgba(255,255,255,0.1);
         display: flex;
+        flex-direction: column;
+        & > div:first-child{
+            position: relative;
+            flex-shrink: 0;
+            font-size: 2rem;
+            color:#fefefe;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        & > div:last-child{
+            position: relative;
+            flex: 1;
+            overflow-y: auto;
+            & > .info{
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+            }
+            & > .nasList{
+                height: 100%;
+                width: 100%;
+                position: relative;
+                & > div{
+                    position: relative;
+                    font-size: 1.5rem;
+                    color: #fefefe;
+                    padding: 1rem;
+                    border-radius: 0.3rem;
+                    background: rgba(255, 255, 255, 0.2);
+                    box-shadow: 8px 8px 40px rgba(0,0,0,.3);
+                    transition: all ease-in-out 300ms;
+                    cursor: pointer;
+                }
+                & > .choose{
+                    background: rgba(255, 255, 255, 0.9);
+                    color: #222;
+                }
+            }
+        }
     }
     footer{
         position: relative;

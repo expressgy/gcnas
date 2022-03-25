@@ -1,0 +1,170 @@
+.main{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    & > .mbody{
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        & > .left{
+            position: relative;
+            flex-shrink: 0;
+            width: 30rem;
+            //background: #06FF00;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            & > header{
+                position: relative;
+                flex-shrink: 0;
+                padding: 3rem 0;
+                & > div{
+                    position: relative;
+                    font-size: 1.8rem;
+                    color:#222;
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
+                }
+            }
+            & > div:nth-child(2){
+                position: relative;
+                flex: 1;
+                & > .title{
+                    position: relative;
+                    font-size: 2rem;
+                    font-weight: bold;
+                    text-align: center;
+                }
+                & > .menuList{
+                    position: relative;
+                    & > div{
+                        position: relative;
+                        line-height: 2em;
+                        font-size: 1.8rem;
+                        border-radius: 0.3rem;
+                        background: rgba(0,0,0,0.1);
+                        margin: 1.5rem 0;
+                        padding: 0.3rem 1rem;
+                        cursor: pointer;
+                        transition: all ease-in-out 300ms;
+                        &:hover{
+                            background: rgba(0,0,0,0.2);
+                            color:#444;
+                            box-shadow: 0px 4px 40px rgba(166,166,166,.8);
+                        }
+                    }
+                    & > .choose{
+                        position: relative;
+                        background: rgba(0,0,0,0.8);
+                        color:#fefefe;
+                        &:hover{
+                            background: rgba(0,0,0,0.8);
+                            color:#fefefe;
+                            box-shadow: 0px 4px 40px rgba(166,166,166,.8);
+                        }
+                    }
+                }
+            }
+            & > footer{
+                position: relative;
+                flex-shrink: 0;
+            }
+        }
+        & > .right{
+            position: relative;
+            margin: 0;
+            flex: 1;
+            padding: 0  1rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            & > header{
+                position: relative;
+                flex-shrink: 0;
+                & > div{
+                    position: relative;
+                    border-radius: 0.3rem;
+                    padding: 1rem;
+                    box-sizing: border-box;
+                    border: 1px solid rgba(100,100,100, 0.6);
+                    display: flex;
+                    & > .cmdpath{
+                        position: relative;
+                        flex: 1;
+                        display: flex;
+                        & > div{
+                            position: relative;
+                            border-radius: 0.3rem;
+                            padding: 0.5rem;
+                            cursor: pointer;
+                            margin: 0 0.5rem;
+                            transition: all ease-in-out 300ms;
+                            & > img{
+                                position: relative;
+                                width: 2.5rem;
+                            }
+                            &:hover{
+                                box-shadow: 0px 4px 40px rgba(166,166,166,.8);
+                                background: #ffffff;
+                            }
+                        }
+                        & > .path{
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            box-sizing: border-box;
+                            padding: 0 1rem;
+                        }
+                        & > div:last-child{
+                            flex: 1;
+                            background: #333333;
+                        }
+                    }
+                    & > .cmdfile{
+                        position: relative;
+                        flex-shrink: 0;
+                        display: flex;
+                        & > div{
+                            position: relative;
+                            border-radius: 0.3rem;
+                            padding: 0.5rem 3rem;
+                            cursor: pointer;
+                            margin: 0 0.5rem;
+                            transition: all ease-in-out 300ms;
+                            background: #6BCB77;
+                            & > img{
+                                position: relative;
+                                width: 2.5rem;
+                            }
+                            &:hover{
+                                box-shadow: 0px 4px 40px rgba(166,166,166,.8);
+                                //background: #ffffff;
+                            }
+                        }
+                    }
+                }
+            }
+            & > div:nth-child(2){
+                flex: 1;
+            }
+            & > footer{
+                flex-shrink: 0;
+            }
+        }
+    }
+}
+.wait{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color:#222;
+    height: 100%;
+}

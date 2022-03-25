@@ -82,11 +82,3 @@ export default function TURN(props){
         <footer></footer>
     </div>)
 }
-
-function TURNAddition(){
-    const [path,setPath] = useState('')
-    const handlePathChange = event => {
-        setPath(event.target.value)
-    }
-    return
-}

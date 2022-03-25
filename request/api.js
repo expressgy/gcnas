@@ -33,6 +33,9 @@ const AskGY = {
     addTurnData : async info => {return Ask.post('./askgy/home/addTurnData',info)},
     editTurnData : async info => {return Ask.post('./askgy/home/editTurnData',info)},
     deleteTurnData : async info => {return Ask.post('./askgy/home/deleteTurnData',info)},
+    //      Nas
+    getNasData : async info => {return Ask.post('./askgy/home/getNasData',info)},
+    addNasData : async info => {return Ask.post('./askgy/home/addNasData',info)},
 }
 
 export default AskGY

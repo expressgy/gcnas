@@ -1,4 +1,4 @@
-import { GOTO, REFRESH, POPUP } from "./constant";
+import { GOTO, REFRESH, POPUP, USENAS } from "./constant";
 
 const defaultState = {
     status : 0
@@ -16,5 +16,7 @@ export default function reducer(state = defaultState,action){
             return {[REFRESH]:action}
         case POPUP:
             return {[POPUP]:action}
+        case USENAS:
+            return {[USENAS]:action}
     }
 }

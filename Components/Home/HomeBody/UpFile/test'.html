@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>fileTEST</title>
+</head>
+<body>
+<input id = 'a' type="file" multiple='multiple' >
+</body>
+<script>
+    const a = document.querySelector('#a')
+    a.onchange = () => {
+        const files = a.files
+        console.log(files)
+        const FD = new FileReader()
+        FD.readAsArrayBuffer(files[0])
+        FD.onload = e => {
+            const ta = new Uint8Array(e.target.result);
+
+            const t = new ArrayBuffer(e.target.result)
+
+            console.log(ta,Array.from(ta))
+        }
+    }
+</script>
+</html>

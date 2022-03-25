@@ -1,5 +1,5 @@
 import store from "./index";
-import {MESSAGE_ERROR, MESSAGE_SUCCESS, MESSAGE_WARNING,MESSAGE_INFO,MESSAGEN,GOTO, REFRESH, POPUP} from "./constant";
+import {MESSAGE_ERROR, MESSAGE_SUCCESS, MESSAGE_WARNING,MESSAGE_INFO,MESSAGEN,GOTO, REFRESH, POPUP, USENAS} from "./constant";
 import { randomString } from "../tools";
 
 const messageDelay = 4000
@@ -81,6 +81,14 @@ export const popup = (element) => {
     const action = {
         type:POPUP,
         element
+    }
+    store.dispatch(action)
+}
+
+export const useNasConnection = (nasID) => {
+    const action = {
+        type:USENAS,
+        nasID
     }
     store.dispatch(action)
 }
