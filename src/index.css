@@ -17,6 +17,14 @@ html,body,#root{
     right: 0;
     margin: 0 auto;
 }
+#popup_window{
+    position: absolute;
+    top:0;
+    left: 0;
+    height: auto;
+    width: 100%;
+    max-height: 100%;
+}
 
 html{
     font-size: 62.5%;

@@ -7,6 +7,7 @@ import App from "./App";
 import './index.css'
 import './widget.css'
 import Message from '../Components/widget/Message'
+import Popup from "../Components/widget/Popup";
 
 
 
@@ -99,6 +100,10 @@ async function start(){
 	ReactDom.render(
 		<Message/>,
 		document.getElementById('message_window')
+	)
+	ReactDom.render(
+		<Popup/>,
+		document.getElementById('popup_window')
 	)
 }
 start()
