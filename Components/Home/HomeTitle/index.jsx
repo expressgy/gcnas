@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Route } from'react-router-dom'
 import gcss from './index.module.scss';
-import AskGY from "../../request/api";
+import AskGY from "../../../request/api";
 
 import ConfigUser from "./ConfigUser";
 import ConfigSystem from "./ConfigSystem";
@@ -10,7 +10,7 @@ import SpecifyRepos from "./SpecifyRepos";
 import deno from './deno.svg'
 import copyright from './copyright.webp'
 import hometltle from './hometitle.jpg'
-import store from "../../redux";
+import store from "../../../redux";
 
 export default function HomeTitle(){
     const [refresh, setRefresh] = useState(false);

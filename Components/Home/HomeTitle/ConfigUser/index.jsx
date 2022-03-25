@@ -1,6 +1,6 @@
 import React,{ useState, useEffect } from "react";
-import {message, refresh, goto} from "../../../redux/actionSender";
-import AskGY from "../../../request/api";
+import {message, refresh, goto} from "../../../../redux/actionSender";
+import AskGY from "../../../../request/api";
 import gcss from './index.module.scss';
 import { useNavigate } from'react-router-dom'
 

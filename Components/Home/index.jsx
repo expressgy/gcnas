@@ -5,8 +5,8 @@ import {message,goto} from "../../redux/actionSender";
 import gcss from './index.module.scss';
 import { authentication, randomString } from "../../tools";
 
-import HomeTitle from "../HomeTitle";
-import HomeBody from "../HomeBody";
+import HomeTitle from "./HomeTitle";
+import HomeBody from "./HomeBody";
 
 
 export default function Home() {

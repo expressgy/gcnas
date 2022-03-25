@@ -23,9 +23,13 @@ const AskGY = {
     /**
      * ********* Home Setting
      * */
+    //  User
     getUserInfo : async info => {return Ask.post('./askgy/home/getUserInfo',info)},
     updateUserInfo : async info => {return Ask.post('./askgy/home/updateUserInfo',info)},
     updateUserPass : async info => {return Ask.post('./askgy/home/updateUserPass',info)},
+    //  System
+    //      turn
+    getTurnData : async info => {return Ask.post('./askgy/home/getTurnData',info)},
 }
 
 export default AskGY
