@@ -101,9 +101,5 @@ async function start(){
 		<Message/>,
 		document.getElementById('message_window')
 	)
-	ReactDom.render(
-		<Popup/>,
-		document.getElementById('popup_window')
-	)
 }
 start()

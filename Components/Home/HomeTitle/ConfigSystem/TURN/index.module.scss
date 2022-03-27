@@ -47,6 +47,56 @@
         width: 100%;
         flex: 1;
         box-sizing: border-box;
+        & > div{
+            position: relative;
+            flex-direction: column;
+            & > div:first-child{
+                background: rgba(255,255,255,.5);
+                border-radius: 0.3rem;
+            }
+            & > div{
+                position: relative;
+                display: flex;
+                color:#fefefe;
+                line-height: 2.5em;
+                font-size: 1.5rem;
+                align-items: center;
+                //overflow-y: auto;
+                margin: 1rem 0;
+                & > div:not(:first-child,:last-child){
+                    position: relative;
+                    flex: 1;
+                    overflow-x: auto;
+                }
+                & > div:first-child{
+                    position: relative;
+                    flex-shrink: 0 ;
+                    width: 6rem ;
+                    box-sizing: border-box;
+                    padding-left: 1rem;
+                }
+                & > div:last-child{
+                    position: relative;
+                    flex-shrink: 0;
+                    width: 8rem;
+                    text-align: center;
+                    cursor: pointer;
+                }
+            }
+            & > div:not(:first-child){
+                & > div:last-child{
+                    background: #fefefe;
+                    line-height: 1.7em;
+                    color:#222;
+                    border-radius: 0.3rem;
+                    transition: all ease-in-out 300ms;
+                    box-shadow: 0 8px 40px rgba(255,255,255,0.1);
+                }
+                & > div:last-child:hover{
+                    box-shadow: 0 8px 40px rgba(255,255,255,0.3);
+                }
+            }
+        }
     }
     & > footer{
         box-sizing: border-box;
@@ -58,67 +108,5 @@
         width: 100%;
         color: #fefefe;
         background: #fefefe;
-    }
-}
-
-.turnAddctionPopup{
-    position: relative;
-    box-sizing: border-box;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    & > header{
-        position: relative;
-        text-align: center;
-        font-size: 1.5rem;
-        line-height: 3em;
-        color:#222;
-        flex-shrink: 0;
-    }
-    & > div:nth-child(2){
-        position: relative;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        & > div{
-            position: relative;
-            margin: 1rem;
-            display: flex;
-            flex: 1;
-            & > div{
-            //    输入提示
-                font-size: 1.2rem;
-                color:#222;
-                padding: 0.3rem;
-            }
-            & > div:first-child{
-                position: relative;
-                flex-shrink: 0;
-                width: 6rem;
-            }
-            & > div:last-child{
-                position: relative;
-                flex: 1;
-                display: flex;
-                input{
-                    position: relative;
-                    display: block;
-                    flex: 1;
-                }
-                border-bottom: 1px solid #333;
-            }
-        }
-        & > div:last-child{
-            //margin-bottom: 0;
-        }
-    }
-    & > footer{
-        position: relative;
-        text-align: center;
-        font-size: 1.5rem;
-        line-height: 3em;
-        color:#222;
-        flex-shrink: 0;
     }
 }

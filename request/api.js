@@ -30,6 +30,9 @@ const AskGY = {
     //  System
     //      turn
     getTurnData : async info => {return Ask.post('./askgy/home/getTurnData',info)},
+    addTurnData : async info => {return Ask.post('./askgy/home/addTurnData',info)},
+    editTurnData : async info => {return Ask.post('./askgy/home/editTurnData',info)},
+    deleteTurnData : async info => {return Ask.post('./askgy/home/deleteTurnData',info)},
 }
 
 export default AskGY

@@ -1,0 +1,84 @@
+.editTurnPopup{
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    & > header{
+        position: relative;
+        text-align: center;
+        font-size: 1.5rem;
+        line-height: 3em;
+        color:#222;
+        flex-shrink: 0;
+    }
+    & > div:nth-child(2){
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        & > div{
+            position: relative;
+            margin: 1rem;
+            display: flex;
+            flex: 1;
+            & > div{
+                //    输入提示
+                font-size: 1.2rem;
+                color:#222;
+                padding: 0.3rem;
+            }
+            & > div:first-child{
+                position: relative;
+                flex-shrink: 0;
+                width: 6rem;
+            }
+            & > div:last-child{
+                position: relative;
+                flex: 1;
+                display: flex;
+                input{
+                    position: relative;
+                    display: block;
+                    flex: 1;
+                }
+                border-bottom: 1px solid #333;
+            }
+        }
+        & > div:last-child{
+            //margin-bottom: 0;
+        }
+    }
+    & > footer{
+        position: relative;
+        text-align: center;
+        font-size: 1.5rem;
+        line-height: 2.5em;
+        color:#222;
+        flex-shrink: 0;
+        display: flex;
+        & > div{
+            position: relative;
+            flex: 1;
+            background: #222;
+            margin: 1rem auto;
+            color: #fefefe;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            transition: all ease-in-out 300ms;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin: 0 4rem;
+            & > img{
+                position: relative;
+                width: 1.8rem;
+                top:-0.1rem;
+                margin-right: 0.3rem;
+            }
+            &:hover{
+
+                box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            }
+        }
+    }
+}

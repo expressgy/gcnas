@@ -1,31 +1,28 @@
 import React,{useState, useEffect} from "react";
 import gcss from './index.module.scss'
-import store from "../../../redux";
 import close from './close.svg'
 
-export default function Popup(){
-    const [element, setElement] = useState('')
+/**
+ *
+ * 说明：
+ * 1.   状态为state
+ * 2.   关闭为close
+ * 3.   子组件为 display:flex
+ * */
+
+
+export default function Popup(props){
+    const [state, setState] = useState(props.state)
     useEffect(() => {
-        const unsubscribe = store.subscribe(() => {
-            const storeData = store.getState().popup;
-            if(!storeData) return false
-            setElement(storeData.element)
-            unsubscribe()
-        })
-    })
-    const handlePopupclose = () => {
-        setElement('')
+        setState(props.state)
+    },[props.state, props.close])
+    const handleCloseClick = event => {
+        props.close()
     }
-
-
-
-    return(element.length == 0 ? <></> :
-        <div  className={gcss.popup}>
-            <div>
-                <div>{element}</div>
-                <div className={gcss.close} onClick={handlePopupclose}>
-                    <img src={close} alt=""/>
-                </div>
-            </div>
-        </div>)
+    return <div style={state ? {display:'flex'} : {display:'none'}} className={gcss.show}>
+        <div>
+            <div>{props.children}</div>
+            <div className={gcss.close}><img src={close} alt="close" onClick={handleCloseClick}/></div>
+        </div>
+    </div>
 }
