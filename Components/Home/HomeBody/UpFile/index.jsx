@@ -43,10 +43,15 @@ export default function UpFile(props){
             type:'file',
             data:file
         })
-        makeMd5.onmessage = e => {
+        makeMd5.onmessage = async e => {
             console.log(e.data)
             if(e.data.type == 'md5'){
-                sendFile(file[e.data.fileIndex],e.data.md5,useNasID)
+                const md = await checkFile(file[e.data.fileIndex], e.data.md5, useNasID, props.now)
+                if(md){
+                    sendFile(file[e.data.fileIndex], e.data.md5, useNasID, props.now)
+                }else{
+                    console.log('文件上传完成')
+                }
             }
         }
     }
@@ -65,8 +70,28 @@ export default function UpFile(props){
     </Popup>
     return ReactDom.createPortal(element,document.getElementById('popup_window'))
 }
-
-function sendFile(file, md5, useNasID){
+function checkFile(file, md5, useNasID, now){
+    return new Promise(rec => {
+        const sendMessage = JSON.stringify({
+            type:'checkFile',
+            data:{
+                fileType:file.type,
+                fileName:file.name,
+                fileSize:file.size,
+                ascription:now,
+                md5
+            }
+        })
+        window.canUseNasList[useNasID].send(sendMessage)
+        window.canUseNasList[useNasID].onMessage(data => {
+            if(data.type == 'checkFile' && data.md5 == md5){
+                console.log(data)
+                rec(data.state)
+            }
+        })
+    })
+}
+function sendFile(file, md5, useNasID, now){
     //  读取二进制文件
     const fr = new FileReader();
     fr.readAsArrayBuffer(file);
@@ -89,6 +114,7 @@ function sendFile(file, md5, useNasID){
                 fileType:file.type,
                 fileName:file.name,
                 fileSize:file.size,
+                ascription:now,
                 md5
             }
         })
@@ -102,6 +128,7 @@ function sendFile(file, md5, useNasID){
                     data:{
                         type:'ing',
                         file:Array.from(atom.slice(chunkSize * i, atom.length)),
+                        ascription:now,
                         num:i,
                         md5:md5
                     }
@@ -112,16 +139,36 @@ function sendFile(file, md5, useNasID){
                 window.canUseNasList[useNasID].send(ing)
             }
         }
+
         const end = JSON.stringify({
             type:'file',
             data:{
                 type:'end',
+                data:{
+                    md5:md5,
+                    fileType:file.type,
+                    fileName:file.name,
+                    fileSize:file.size,
+                    ascription:now,
+                },
                 md5
             }
         })
         window.canUseNasList[useNasID].send(end)
         console.log(file.name,'上传耗时',new Date().getTime() - t)
+        const endState = await getFileEnd(md5,useNasID)
+        console.log(endState)
     }
+}
+function getFileEnd(md5,useNasID){
+    return new Promise(rec => {
+        console.log(window.canUseNasList[useNasID])
+        window.canUseNasList[useNasID].onMessage(e => {
+            if(e.type =='fileEND' && e.md5 == md5){
+                rec(e.state)
+            }
+        })
+    })
 }
 async function send_v(atom, chunkSize, i, md5){
     return new Promise(rec => {

@@ -11,6 +11,7 @@
         flex: 1;
         overflow: hidden;
         display: flex;
+        height: 100%;
         & > .left{
             position: relative;
             flex-shrink: 0;
@@ -84,6 +85,8 @@
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
+            height: 100%;
             & > header{
                 position: relative;
                 flex-shrink: 0;
@@ -147,11 +150,81 @@
                                 //background: #ffffff;
                             }
                         }
+                        & > div:first-child{
+                            background: rgb(255,202,40);
+                        };
                     }
                 }
             }
             & > div:nth-child(2){
+                position: relative;
                 flex: 1;
+                box-sizing: border-box;
+                padding: 2rem 0;
+                height: 100%;
+                overflow: hidden;
+                .fileBody{
+                    position: relative;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content:flex-start;
+                    height: 100%;
+                    overflow-y: auto;
+                    .fileBox{
+                        position: relative;
+                        //flex-shrink: 0;
+                        width: 18rem;
+                        max-height: 20rem;
+                        aspect-ratio: calc(1/1);
+                        margin: 1rem;
+                        box-sizing: border-box;
+                        padding: 1rem;
+                        border-radius: 0.3rem;
+                        border: 1px solid rgba(100,100,100,0.3);
+                        cursor: pointer;
+                        box-shadow: 0px 8px 20px rgba(0,0,0,.1);
+                        top:0;
+                        transition: all ease-in-out 300ms;
+                        .fileICO{
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 14rem;
+                            aspect-ratio: calc(1/1);
+                            margin: 0 auto;
+                            & > img{
+                                position: relative;
+                                //width: 14rem;
+                                height: 8rem;
+                                transition: all ease-in-out 300ms;
+                            }
+                        }
+                        .filename{
+                            position: absolute;
+                            bottom: 0.1rem;
+                            left: 0.1rem;
+                            width:  99%;
+                            color:#222222;
+                            line-height: 2rem;
+                            border-radius: 0.3rem;
+                            background: rgb(255,202,40);
+                            overflow: hidden;
+                            text-overflow:ellipsis;
+                            white-space: nowrap;
+                            padding: 0.3rem ;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        &:hover img{
+                            height: 9rem;
+                        }
+                        &:hover{
+                            top:-0.5rem;
+                            box-shadow: 0px 8px 20px rgba(0,0,0,.2);
+                        }
+                    }
+                }
             }
             & > footer{
                 flex-shrink: 0;
@@ -167,4 +240,36 @@
     font-size: 3rem;
     color:#222;
     height: 100%;
+}
+
+/* 整个滚动条背景 */
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+}
+/* 滚动条上的按钮 (上下箭头). */
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+    //background-color: rgb(166, 167, 173);
+    //opacity: 0.2;
+}
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    /* 上下两头给个圆角 */
+    background-color: #ababab;
+    border-radius: 10px;
+    /* 还可以给它加个阴影 */
+    //box-shadow: inset 0 0 6px rgba(0, 0, 0, .9);
+}
+/* 滚动条轨道 */
+::-webkit-scrollbar-track {
+    //box-shadow: inset 0 0 6px rgba(10, 10, 10, 0.2);
+    border-radius: 10px;
+    background-color: #ddd;
+}
+/* 当同时有垂直滚动条和水平滚动条时交汇的部分. */
+::-webkit-scrollbar-corner {
+    background: steelblue;
+    border-radius: 50% 50%;
 }

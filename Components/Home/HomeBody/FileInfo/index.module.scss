@@ -1,0 +1,80 @@
+.main{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    & > header{
+        position: relative;
+        flex-shrink: 0;
+        text-align: center;
+        padding: 0rem 0 2rem;
+        font-size: 1.8rem;
+        color: #222;
+    }
+    & > div:nth-child(2){
+        position: relative;
+        flex: 1;
+        padding: 0 4rem;
+        & > div{
+            position: relative;
+            display: flex;
+            & > div:first-child{
+                position: relative;
+                font-size: 1.6rem;
+                font-weight: bold;
+                line-height: 1.5em;
+                width: 10rem;
+            }
+            & > div:last-child{
+                position: relative;
+                height: 2.4rem;
+                font-size: 1.4rem;
+                display: flex;
+                align-items: center;
+                input{
+                    position: relative;
+                    height: 2.4rem;
+                    font-size: 1.4rem;
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 2px solid rgba(100, 100, 100, 0.5);
+                }
+            }
+        }
+    }
+    & > footer{
+        position: relative;
+        flex-shrink: 0;
+        text-align: center;
+        text-align: center;
+        padding: 2rem 0 0rem;
+        color: #222;
+        display: flex;
+        & > div{
+            position: relative;
+            box-sizing: border-box;
+            padding: 0.6rem 2rem;
+            background: #111111;
+            color:#fefefe;
+            margin: 0 auto;
+            border-radius: 0.3rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all ease-in-out 300ms;
+            width: 10rem;
+            &:hover{
+                box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+            }
+        }
+        & > div:first-child{
+            background: #6BCB77;
+        }
+        & > div:nth-child(2){
+            background: red;
+        }
+        & > div:last-child{
+            background: #333;
+        }
+    }
+}

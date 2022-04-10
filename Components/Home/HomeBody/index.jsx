@@ -1,22 +1,74 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import gcss from './index.module.scss'
 import store from "../../../redux";
 import AskGY from "../../../request/api";
 import { randomString } from "../../../tools";
 import { message } from "../../../redux/actionSender";
+
+
 import homeSVG from './home.svg'
 import backSVG from './back.svg'
 import flushSVG from './flush.svg'
 import upfileSVG from './upfile.svg'
+import newfolder from './newfolder.svg'
+
+import erSVG from './fileSVG/er.svg'
+import EXCELSVG from './fileSVG/EXCEL.svg'
+import FOLDERSVG from './fileSVG/FOLDER.svg'
+import PDFSVG from './fileSVG/PDF.svg'
+import PHOTOSVG from './fileSVG/PHOTO.svg'
+import PPTSVG from './fileSVG/PPT.svg'
+import TXTSVG from './fileSVG/TXT.svg'
+import VIDEOSVG from './fileSVG/VIDEO.svg'
+import WORDSVG from './fileSVG/WORD.svg'
+import ZIPSVG from './fileSVG/ZIP.svg'
+import CODESVG from './fileSVG/code.svg'
+import ATOMSVG from './fileSVG/atom.svg'
+import CSSSVG from './fileSVG/css.svg'
+import HTMLSVG from './fileSVG/HTML.svg'
+import RARSVG from './fileSVG/RAR.svg'
+import Z7SVG from './fileSVG/7z.svg'
+import EXESVG from './fileSVG/exe.svg'
+
+
 import UpFile from "./UpFile";
+import NewFolder from "./NewFolder";
+import FileInfo from "./FileInfo";
+
+const fileSVG = {
+    er:erSVG,
+    excel:EXCELSVG,
+    folder:FOLDERSVG,
+    pdf:PDFSVG,
+    photo:PHOTOSVG,
+    ppt:PPTSVG,
+    txt:TXTSVG,
+    video:VIDEOSVG,
+    word:WORDSVG,
+    zip:ZIPSVG,
+    code:CODESVG,
+    atom:ATOMSVG,
+    css:CSSSVG,
+    html:HTMLSVG,
+    rar:RARSVG,
+    z7:Z7SVG,
+    exe:EXESVG
+}
 
 export default function HomeBody(){
     const [useNasID, setUseNasID] = useState('')
     const [wsState, setWsState] = useState(true)
     const [connectionState, setConnectionState] = useState(false)
     const [showFileType, setShowFileType] = useState(0)
+    const [refresh,setRefresh] = useState(true)
+    const [now,setNow] = useState(0)
+    const [fileList, setFileList] = useState([])
 
     const [upfileWindowState, setUpfileWindowSatte] = useState(false)
+    const [newFolderWindowState, setNewFolderWindowState] = useState(false)
+    const [fileInfoWindowState, setFileInfoWindowState] = useState(false)
+    const [infoData, setInfoData] = useState({})
+
 
     useEffect(async () => {
         //  初始化可用nas列表
@@ -97,6 +149,72 @@ export default function HomeBody(){
         })()
     }
 
+    const handleNewFolderOpen = () => {
+        setNewFolderWindowState(true)
+    }
+    const handleNewFolderClose = () => {
+        return (() => {
+            setNewFolderWindowState(false)
+        })()
+    }
+    const handleFileInfoClose = () => {
+        return (() => {
+            setFileInfoWindowState(false)
+        })()
+    }
+    const refreshFunc = () => {
+        return setRefresh(!refresh)
+    }
+
+    const handleRefreshClick = () => {
+        //  刷新页面
+        setRefresh(!refresh)
+        message.info('Refreshing')
+    }
+    const handleGobackClick = () => {
+        //  返回上一级
+        if(now == 0){
+            message.warning('根目录无法退回')
+            return
+        }else{
+
+        }
+    }
+    const handleGohomeClick = async () => {
+        //  回到根目录
+        if(connectionState){
+            const fileList = await getList(0,useNasID)
+            console.log(fileList)
+            setFileList(fileList.data)
+        }
+    }
+
+    const handleFileClick = event => {
+        return async function (){
+            if(event.isfolder == 1){
+                const fileList = await getList(event.id,useNasID)
+                console.log(fileList)
+                setFileList(fileList.data)
+                setNow(event.id)
+            }else{
+                setInfoData(event)
+                setFileInfoWindowState(true)
+            }
+        }
+    }
+    const senInfoData = () => {
+        return infoData
+    }
+
+    useEffect(async () => {
+        if(connectionState){
+            const fileList = await getList(now,useNasID)
+            console.log(fileList)
+            setFileList(fileList.data)
+        }
+    },[connectionState,refresh])
+
+
 
     if(connectionState){
         return (<div className={gcss.main}>
@@ -121,18 +239,32 @@ export default function HomeBody(){
                     <header>
                         <div>
                             <div className={gcss.cmdpath}>
-                                <div><img src={homeSVG} alt=""/></div>
-                                <div><img src={backSVG} alt=""/></div>
-                                <div><img src={flushSVG} alt=""/></div>
+                                <div onClick={handleGohomeClick}><img src={homeSVG} alt=""/></div>
+                                <div onClick={handleGobackClick}><img src={backSVG} alt=""/></div>
+                                <div onClick={handleRefreshClick}><img src={flushSVG} alt=""/></div>
                                 <div className={gcss.path}>USERNAMEyjJGg</div>
                             </div>
                             <div className={gcss.cmdfile}>
-                                <div onClick={ handleUpfileOpen }><img src={upfileSVG} alt=""/></div>
+                                <div onClick={ handleNewFolderOpen }><img src={newfolder} alt="新建文件夹" title='新建文件夹'/></div>
+                                <div onClick={ handleUpfileOpen }><img src={upfileSVG} alt="上传文件" title='上传文件'/></div>
                             </div>
-                            <UpFile state={ upfileWindowState } close={ handleUpfileClose } useNasID={useNasID}></UpFile>
+                            <UpFile state={ upfileWindowState } close={ handleUpfileClose } useNasID={useNasID} now={now} refreshFunc={refreshFunc}></UpFile>
+                            <NewFolder  state={ newFolderWindowState } close={ handleNewFolderClose } useNasID={useNasID} now={now} refreshFunc={refreshFunc}/>
                         </div>
                     </header>
-                    <div></div>
+                    <div>
+                        <div className={gcss.fileBody}>
+                            {fileList.map((item, index) => {
+                                return (<div key={item.id} className={gcss.fileBox} title={item.filename} onClick={handleFileClick(item)}>
+                                    <div className={gcss.fileICO}>
+                                        <img src={returnICO(item)} alt=""/>
+                                    </div>
+                                    <div className={gcss.filename}>{item.filename}</div>
+                                </div>)
+                            })}
+                        </div>
+                        <FileInfo  state={ fileInfoWindowState } close={ handleFileInfoClose } useNasID={useNasID} now={now} refreshFunc={refreshFunc} data={senInfoData}/>
+                    </div>
                     <footer></footer>
                 </div>
             </div>
@@ -143,6 +275,20 @@ export default function HomeBody(){
         </div>)
     }
 
+}
+function getList(next,useNasID){
+    return new Promise(rec => {
+        const ms = JSON.stringify({
+            type:'getFileList',
+            next
+        })
+        window.canUseNasList[useNasID].send(ms);
+        window.canUseNasList[useNasID].onMessage(e => {
+            if(e.type == 'getFileList'){
+                rec(e)
+            }
+        })
+    })
 }
 
 //  信令服务
@@ -351,6 +497,7 @@ class U_RTC{
     #RTC
     #onMessage
     #RTCD_HEART
+    #RTCChannelOpen
     constructor(iceConfig) {
         this.#defaultIceConfig = iceConfig
     }
@@ -413,7 +560,9 @@ class U_RTC{
                 console.log('非JSON数据',msg.data)
             }
         }
+
         RTCChannel.onopen = ()=>{
+            this.#RTCChannelOpen('open')
             console.log('DataChannel is Open',this)
             this.#RTCD_HEART = setInterval(() => {
                 this.RTCD.send(JSON.stringify({
@@ -432,6 +581,11 @@ class U_RTC{
     onMessage(callback){
         this.#onMessage = (data) => {
             callback(data)
+        }
+    }
+    RTCChannelOnOpen(callback){
+        this.#RTCChannelOpen = open => {
+            callback()
         }
     }
 }
@@ -467,5 +621,67 @@ async function createConnection(nasID,callback){
     const answer = await sl.createRTC(master, offer, rtcName)
     userRTC.setAnswer(answer)
     window.canUseNasList[nasID] = userRTC
-    callback()
+    userRTC.RTCChannelOnOpen(() => {
+        callback()
+    })
+}
+
+function returnICO(data){
+    const f = data.filename.split('.').slice(-1)[0];
+    if(data.isfolder){
+        return fileSVG.folder
+    }
+    if(data.filetype.indexOf('application/vnd.openxmlformats-o') > -1){
+        console.log(f)
+        if(f.indexOf('xls') > -1){
+            return fileSVG.excel
+        }else if(f.indexOf('doc') > -1){
+            return fileSVG.word
+        }else if(f.indexOf('ppt') > -1){
+            return fileSVG.ppt
+        }
+    }else if(data.filetype.indexOf('pdf') > -1){
+        return fileSVG.pdf
+    }else if(data.filetype.indexOf('javascript') > -1){
+        return fileSVG.code
+    }else if(data.filetype.indexOf('zip') > -1){
+        return fileSVG.zip
+    }
+    if(f.indexOf('xls') > -1){
+        return fileSVG.excel
+    }else if(f.indexOf('doc') > -1){
+        return fileSVG.word
+    }else if(f.indexOf('ppt') > -1){
+        return fileSVG.ppt
+    }else if(f.indexOf('zip') > -1){
+        return fileSVG.zip
+    }else if(f.indexOf('rar') > -1){
+        return fileSVG.rar
+    }else if(f.indexOf('gz') > -1){
+        return fileSVG.zip
+    }else if(f.indexOf('7z') > -1){
+        return fileSVG.z7
+    }else if(f.indexOf('mp4') > -1){
+        return fileSVG.video
+    }else if(f.indexOf('mkv') > -1){
+        return fileSVG.video
+    }else if(f.indexOf('rmvb') > -1){
+        return fileSVG.video
+    }else if(f.indexOf('avi') > -1){
+        return fileSVG.video
+    }else if(f.indexOf('c') > -1){
+        return fileSVG.atom
+    }else if(f.indexOf('cpp') > -1){
+        return fileSVG.atom
+    }else if(f.indexOf('jsx') > -1){
+        return fileSVG.code
+    }else if(f.indexOf('html') > -1){
+        return fileSVG.html
+    }else if(f.indexOf('css') > -1){
+        return fileSVG.css
+    }else if(f.indexOf('exe') > -1){
+        return fileSVG.exe
+    }
+
+    return fileSVG.er
 }
